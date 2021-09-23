@@ -47,7 +47,7 @@ namespace ShoppingPromoCore.Core.RuleFinder
                 var ruleInfo = _promotionFactory.GetPromotionRule(ruleDetail.PromoType);
                 ruleInfo.Id = ruleDetail.Id;
                 ruleInfo.Name = ruleDetail.Name;
-                ruleInfo.PromotionRuleItems = new List<PromotionRuleItem>();
+                ruleInfo.PromotionRuleItems = new List<IPromotionRuleItem>();
                 foreach (var promoRuleItemDetails in ruleDetail.PromotionRuleDetails)
                 {
                     ruleInfo.PromotionRuleItems.Add(new PromotionRuleItem{ Quantity = promoRuleItemDetails.Quantity,

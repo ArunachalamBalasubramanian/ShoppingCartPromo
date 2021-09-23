@@ -40,8 +40,14 @@ namespace ShoppingPromoCore.Core.Promotion
             return _numberOfTimesToApplyThePromotion > 0;
         }
 
+        private bool IsDefaultMatchingValue()
+        {
+            return _numberOfTimesToApplyThePromotion == Int32.MaxValue;
+        }
+
         private void ContributeToPromotionCount(int ruleItemCount)
         {
+
             if (ruleItemCount < _numberOfTimesToApplyThePromotion)
             {
                 _numberOfTimesToApplyThePromotion = ruleItemCount;
@@ -50,17 +56,20 @@ namespace ShoppingPromoCore.Core.Promotion
 
         private void CalculateDiscount(Order order)
         {
-            DisCountedPrice = _numberOfTimesToApplyThePromotion * TotalPrice;
-
-           
-            foreach (var ruleItem in PromotionRuleItems)
+            if (!IsDefaultMatchingValue())
             {
+                DisCountedPrice = _numberOfTimesToApplyThePromotion * TotalPrice;
 
-                DiscountedItems.Add(new OrderItem
+
+                foreach (var ruleItem in PromotionRuleItems)
                 {
-                    SkuId = ruleItem.SkuId,
-                    Quantity = (ruleItem.Quantity * _numberOfTimesToApplyThePromotion)
-                });
+
+                    DiscountedItems.Add(new OrderItem
+                    {
+                        SkuId = ruleItem.SkuId,
+                        Quantity = (ruleItem.Quantity * _numberOfTimesToApplyThePromotion)
+                    });
+                }
             }
 
         }

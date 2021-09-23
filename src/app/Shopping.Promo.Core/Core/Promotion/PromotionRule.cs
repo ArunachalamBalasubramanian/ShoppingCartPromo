@@ -9,7 +9,7 @@ namespace ShoppingPromoCore.Core.Promotion
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public List<PromotionRuleItem> PromotionRuleItems { get; set; }
+        public List<IPromotionRuleItem> PromotionRuleItems { get; set; }
 
         protected bool IsActive { get; set; }
 

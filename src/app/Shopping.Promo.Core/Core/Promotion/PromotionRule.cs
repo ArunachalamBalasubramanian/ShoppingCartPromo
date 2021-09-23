@@ -24,14 +24,14 @@ namespace ShoppingPromoCore.Core.Promotion
         protected decimal DisCountedPrice = 0;
         protected List<OrderItem> DiscountedItems;
 
-        public List<OrderItem> GetDiscountedItems()
+        public virtual List<OrderItem> GetDiscountedItems()
         {
             return DiscountedItems;
         }
 
 
 
-        public decimal GetDiscountedPrice()
+        public virtual decimal GetDiscountedPrice()
         {
             return DisCountedPrice;
         }

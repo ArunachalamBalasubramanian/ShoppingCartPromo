@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FakeItEasy;
 using ShoppingPromoCore.Core.OrderInfo;
 using ShoppingPromoCore.Entities;
 using ShoppingPromoCore.Interfaces;
@@ -53,5 +54,11 @@ namespace Shopping.Promo.Core.Tests
 
             Assert.Equal(2, ord.Items.Count);
         }
+
+
+      
+
+
+        
     }
 }

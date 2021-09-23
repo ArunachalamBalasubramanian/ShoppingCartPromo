@@ -4,6 +4,7 @@
     {
         None = 0,
         Fixed = 1,
-        Percentage = 2
+        Percentage = 2,
+        Variable =3
     }
 }

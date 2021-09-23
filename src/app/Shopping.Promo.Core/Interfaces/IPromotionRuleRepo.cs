@@ -5,6 +5,6 @@ namespace ShoppingPromoCore.Interfaces
 {
     public interface IPromotionRuleRepo
     {
-        List<PromotionDetails> GetPromotionRulesBySkuId(List<long> ids);
+        List<PromotionDetails> GetPromotionRulesBySkuId(List<char> ids);
     }
 }

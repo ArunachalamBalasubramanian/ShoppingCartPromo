@@ -7,6 +7,7 @@ namespace ShoppingPromoCore.Entities
         public long Id { get; set; }
         public string Name { get; set; }
         public List<PromotionRuleDetails> PromotionRuleDetails { get; set; }
+        public PromotionType PromoType { get; set; }
 
     }
 }

@@ -9,7 +9,7 @@ namespace ShoppingPromoCore.Infra
     /// </summary>
     public class PromotionRuleRepository : IPromotionRuleRepo
     {
-        public List<PromotionDetails> GetPromotionRulesBySkuId(List<long> ids)
+        public List<PromotionDetails> GetPromotionRulesBySkuId(List<char> ids)
         {
             return new List<PromotionDetails>();
         }

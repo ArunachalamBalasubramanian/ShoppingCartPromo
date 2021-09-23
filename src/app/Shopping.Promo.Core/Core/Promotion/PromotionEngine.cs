@@ -12,7 +12,6 @@ namespace ShoppingPromoCore.Core.Promotion
             {
                 if (orderDiscCalculator.HasItemEligibleForPromotion())
                 {
-
                     rule.ApplyPromotion(orderDiscCalculator.GetOrder());
 
                     orderDiscCalculator.DiscountOrderItems(rule.GetDiscountedItems(),

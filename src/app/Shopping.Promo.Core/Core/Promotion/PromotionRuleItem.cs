@@ -1,17 +1,20 @@
 ﻿using System.Linq;
 using ShoppingPromoCore.Entities;
+using ShoppingPromoCore.Interfaces;
 
 namespace ShoppingPromoCore.Core.Promotion
 {
-    public class PromotionRuleItem
+
+    
+    public class PromotionRuleItem : IPromotionRuleItem
     {
-        public char SKUId { get; set; }
+        public char SkuId { get; set; }
         public int Quantity { get; set; }
 
         public int MaxNumberOfTimesApplicable(Order order)
         {
             var matchedOrderObj = order.Items.
-                FirstOrDefault(orderItem => orderItem.SkuId == SKUId);
+                FirstOrDefault(orderItem => orderItem.SkuId == SkuId);
             if (matchedOrderObj == null)
             {
                 return 0;

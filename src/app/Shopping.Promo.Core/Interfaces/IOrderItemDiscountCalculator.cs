@@ -3,7 +3,7 @@
     public interface IOrderItemDiscountCalculator
     {
         bool IsPromotionApplied();
-        long GetItemSkuId();
+        char GetItemSkuId();
         long GetQuantity();
         bool CanDiscountItems(int discountNeeded);
         void ApplyDiscountQuantity(int discountQuantity);

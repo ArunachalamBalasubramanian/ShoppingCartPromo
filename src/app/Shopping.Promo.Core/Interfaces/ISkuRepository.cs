@@ -2,6 +2,6 @@
 {
     public interface ISkuRepository
     {
-        decimal GetSKUPrice(long skuid);
+        decimal GetSkuPrice(char skuId);
     }
 }

@@ -42,8 +42,8 @@ namespace ShoppingPromoCore.Core.OrderInfo
             _orderDiscountCalculator.Initialize(order);
             foreach (var item in order.Items)
             {
-                var indivPrice = _skuRepo.GetSKUPrice(item.SkuId);
-                _orderDiscountCalculator.AddOrderItem(new OrderItemDiscountCalculator(item, indivPrice));
+                var unitPrice = _skuRepo.GetSkuPrice(item.SkuId);
+                _orderDiscountCalculator.AddOrderItem(new OrderItemDiscountCalculator(item, unitPrice));
             }
 
             return _orderDiscountCalculator;

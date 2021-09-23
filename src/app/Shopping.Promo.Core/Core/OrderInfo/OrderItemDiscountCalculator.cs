@@ -5,13 +5,13 @@ namespace ShoppingPromoCore.Core.OrderInfo
 {
     public class OrderItemDiscountCalculator : IOrderItemDiscountCalculator
     {
-        private OrderItem _orderItem;
-        private decimal _unitPrice;
+        private readonly OrderItem _orderItem;
+        private readonly decimal _unitPrice;
         private decimal _actualTotalPrice;
         private int _discountedQuantity;
         private bool _isPromotionApplied;
 
-        public long GetItemSkuId()
+        public char GetItemSkuId()
         {
             return _orderItem.SkuId;
         }

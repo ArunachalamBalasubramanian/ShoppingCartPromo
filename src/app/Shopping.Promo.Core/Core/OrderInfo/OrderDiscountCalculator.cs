@@ -10,11 +10,11 @@ namespace ShoppingPromoCore.Core.OrderInfo
         private Order _order;
         private decimal _cumulativePriceWithPromotion;
         private decimal _cumulativePriceWithOutPromotion;
-        private List<IOrderItemDiscountCalculator> _checkedOutItemCalculator;
+        private readonly List<IOrderItemDiscountCalculator> _checkedOutItemDiscountCalculator;
 
         public OrderDiscountCalculator()
         {
-            _checkedOutItemCalculator = new List<IOrderItemDiscountCalculator>();
+            _checkedOutItemDiscountCalculator = new List<IOrderItemDiscountCalculator>();
         }
 
 
@@ -25,6 +25,7 @@ namespace ShoppingPromoCore.Core.OrderInfo
 
         public void Initialize(Order order)
         {
+            _checkedOutItemDiscountCalculator.Clear();
             _order = order;
         }
 
@@ -33,12 +34,13 @@ namespace ShoppingPromoCore.Core.OrderInfo
 
         public void AddOrderItem(IOrderItemDiscountCalculator item)
         {
-            _checkedOutItemCalculator.Add(item);
+            _checkedOutItemDiscountCalculator.Add(item);
         }
 
-        private IOrderItemDiscountCalculator GetCheckedOutOrderItemBySKUId(long id)
+        private IOrderItemDiscountCalculator GetCheckedOutOrderItemBySkuId(char id)
         {
-            return _checkedOutItemCalculator.FirstOrDefault(item => item.GetItemSkuId() == id);
+            return _checkedOutItemDiscountCalculator.FirstOrDefault(item =>
+                item.GetItemSkuId() == id);
         }
 
         private bool IsDiscountValid(List<OrderItem> orderItems)
@@ -54,7 +56,7 @@ namespace ShoppingPromoCore.Core.OrderInfo
 
         private bool CheckDiscount(OrderItem item)
         {
-            var processedItem = GetCheckedOutOrderItemBySKUId(item.SkuId);
+            var processedItem = GetCheckedOutOrderItemBySkuId(item.SkuId);
 
             if (processedItem != null)
             {
@@ -81,26 +83,27 @@ namespace ShoppingPromoCore.Core.OrderInfo
         {
             foreach (var item in orderItems)
             {
-                var processedItem = GetCheckedOutOrderItemBySKUId(item.SkuId);
+                var processedItem = GetCheckedOutOrderItemBySkuId(item.SkuId);
                 processedItem.ApplyDiscountQuantity(item.Quantity);
             }
         }
 
         public bool HasItemEligibleForPromotion()
         {
-            return _checkedOutItemCalculator.FirstOrDefault(item => item.IsPromotionApplied() == false) != null;
+            return _checkedOutItemDiscountCalculator.
+                FirstOrDefault(item => item.IsPromotionApplied() == false) != null;
         }
 
         public decimal GetTotalPrice()
         {
-            _cumulativePriceWithOutPromotion = GetSKUPriceWithoutDiscount();
+            _cumulativePriceWithOutPromotion = GetSkuPriceWithoutDiscount();
             return _cumulativePriceWithPromotion + _cumulativePriceWithOutPromotion;
         }
 
-        private decimal GetSKUPriceWithoutDiscount()
+        private decimal GetSkuPriceWithoutDiscount()
         {
             decimal price = 0;
-            foreach (var item in _checkedOutItemCalculator)
+            foreach (var item in _checkedOutItemDiscountCalculator)
             {
                 price = price + item.GetUnDiscountedPrice();
             }

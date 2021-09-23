@@ -5,7 +5,7 @@ namespace ShoppingPromoCore.Entities
 {
     public class PromotionRuleDetails
     {
-        public char SKUId { get; set; }
+        public char SkuId { get; set; }
         public int Quantity { get; set; }
     }
 }

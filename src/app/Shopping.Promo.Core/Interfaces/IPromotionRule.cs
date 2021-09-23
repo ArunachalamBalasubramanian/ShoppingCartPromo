@@ -12,8 +12,4 @@ namespace ShoppingPromoCore.Interfaces
         List<OrderItem> GetDiscountedItems();
         decimal GetDiscountedPrice();
     }
-
-
-
-
 }

@@ -58,7 +58,7 @@ namespace ShoppingPromoCore.Core.Promotion
 
                 discountedItems.Add(new OrderItem
                 {
-                    SkuId = ruleItem.SKUId,
+                    SkuId = ruleItem.SkuId,
                     Quantity = (ruleItem.Quantity * _numberOfTimesToApplyThePromotion)
                 });
             }

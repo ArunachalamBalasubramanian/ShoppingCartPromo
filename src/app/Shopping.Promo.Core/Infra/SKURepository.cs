@@ -4,7 +4,7 @@ using ShoppingPromoCore.Interfaces;
 
 namespace ShoppingPromoCore.Infra
 {
-    public class SKURepository : ISKURepository
+    public class SKURepository : ISkuRepository
     {
         public decimal GetSKUPrice(long skuid)
         {

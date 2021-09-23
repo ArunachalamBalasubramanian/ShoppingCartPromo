@@ -6,11 +6,11 @@ namespace ShoppingPromoCore.Core.OrderInfo
 {
     public class OrderCheckOutProcessor : IOrderCheckOutProcessor 
     {
-        private readonly ISKURepository _skuRepo;
+        private readonly ISkuRepository _skuRepo;
         private readonly IPromotionRuleFinder _ruleFinder;
         private readonly IPromotionEngine _promotionEngine;
         private readonly IOrderDiscountCalculator _orderDiscountCalculator;
-        public OrderCheckOutProcessor(ISKURepository skuRepo,
+        public OrderCheckOutProcessor(ISkuRepository skuRepo,
             IPromotionRuleFinder promotionRuleFinder,
             IPromotionEngine promotionEngine,
             IOrderDiscountCalculator orderDiscountCalculator

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ShoppingPromoCore.Core;
 using ShoppingPromoCore.Entities;
 
 namespace ShoppingPromoCore.Interfaces

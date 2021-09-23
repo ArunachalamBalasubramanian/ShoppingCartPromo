@@ -26,6 +26,7 @@ namespace ShoppingPromoCore.Core.RuleFinder
             _promoRuleRepo = promoRuleRepo;
             _promotionFactory = promotionFactory;
             _logger = logger;
+
         }
 
         public List<IPromotionRule> GetPromotionRules(Order order)

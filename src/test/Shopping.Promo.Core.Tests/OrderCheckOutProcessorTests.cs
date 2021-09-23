@@ -1,9 +1,9 @@
-using System;
-using Xunit;
 
+using Xunit;
+using Xunit.Abstractions;
 namespace Shopping.Promo.Core.Tests
 {
-    public class UnitTest1
+    public class OrderCheckOutProcessorTests
     {
         [Fact]
         public void Test1()

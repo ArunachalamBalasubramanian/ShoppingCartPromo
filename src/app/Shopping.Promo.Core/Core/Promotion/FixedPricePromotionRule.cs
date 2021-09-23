@@ -6,7 +6,6 @@ namespace ShoppingPromoCore.Core.Promotion
 {
     public class FixedPricePromotionRule : PromotionRule
     {
-        // 3A + 2b = 350
         public decimal TotalPrice { get; set; }
 
         private int _numberOfTimesToApplyThePromotion;
@@ -23,10 +22,10 @@ namespace ShoppingPromoCore.Core.Promotion
         public override void ApplyPromotion(Order order)
         {
             Reset();
-            GetPromotionCount(order);
+            UpdatePromotionCount(order);
             if (IsPromotionApplicable())
             {
-                ApplyDiscount(order);
+                CalculateDiscount(order);
             }
         }
 
@@ -44,19 +43,15 @@ namespace ShoppingPromoCore.Core.Promotion
             }
         }
 
-        private void ApplyDiscount(Order order)
+        private void CalculateDiscount(Order order)
         {
-            // Rule 3A+2B
-
-            //order --> 7A + 2B
-
             DisCountedPrice = _numberOfTimesToApplyThePromotion * TotalPrice;
 
-            List<OrderItem> discountedItems = new List<OrderItem>();
+           
             foreach (var ruleItem in PromotionRuleItems)
             {
 
-                discountedItems.Add(new OrderItem
+                DiscountedItems.Add(new OrderItem
                 {
                     SkuId = ruleItem.SkuId,
                     Quantity = (ruleItem.Quantity * _numberOfTimesToApplyThePromotion)
@@ -65,21 +60,16 @@ namespace ShoppingPromoCore.Core.Promotion
 
         }
 
-        private void GetPromotionCount(Order order)
+        private void UpdatePromotionCount(Order order)
         {
-            // 3A 2B - Rule
-            // Incoming 6A 5B
-
             foreach (var ruleItem in PromotionRuleItems)
             {
                 if (IsPromotionApplicable())
                 {
-                    var promotionCountpossible = ruleItem.MaxNumberOfTimesApplicable(order);
-                    ContributeToPromotionCount(promotionCountpossible);
+                    var possiblePromotionCount = ruleItem.GetMaxNumberOfTimesPromotionApplicable(order);
+                    ContributeToPromotionCount(possiblePromotionCount);
                 }
             }
-
-
         }
     }
 }

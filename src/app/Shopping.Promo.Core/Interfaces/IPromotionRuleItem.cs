@@ -4,6 +4,6 @@ namespace ShoppingPromoCore.Interfaces
 {
     public interface IPromotionRuleItem
     {
-        int MaxNumberOfTimesApplicable(Order order);
+        int GetMaxNumberOfTimesPromotionApplicable(Order order);
     }
 }

@@ -7,6 +7,5 @@ namespace ShoppingPromoCore.Entities
         public long Id { get; set; }
 
         public List<OrderItem> Items { get; set; }
-
     }
 }

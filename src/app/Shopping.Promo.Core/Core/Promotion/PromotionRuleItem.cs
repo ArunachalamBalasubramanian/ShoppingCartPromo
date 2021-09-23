@@ -11,7 +11,7 @@ namespace ShoppingPromoCore.Core.Promotion
         public char SkuId { get; set; }
         public int Quantity { get; set; }
 
-        public int MaxNumberOfTimesApplicable(Order order)
+        public int GetMaxNumberOfTimesPromotionApplicable(Order order)
         {
             var matchedOrderObj = order.Items.
                 FirstOrDefault(orderItem => orderItem.SkuId == SkuId);

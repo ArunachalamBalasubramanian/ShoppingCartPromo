@@ -4,6 +4,10 @@ using ShoppingPromoCore.Interfaces;
 
 namespace ShoppingPromoCore.Core.RuleFinder
 {
+    /// <summary>
+    /// New promotion rules can be added in the section or existing promotion
+    /// can be changed in this portion which wil use the new logic if needed
+    /// </summary>
     public class PromotionRuleFactory : IPromotionFactory
     {
         public IPromotionRule GetPromotionRule(PromotionType promoType)

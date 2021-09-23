@@ -10,18 +10,19 @@ namespace ShoppingPromoCore.Core.OrderInfo
         private readonly IPromotionRuleFinder _ruleFinder;
         private readonly IPromotionEngine _promotionEngine;
         private readonly IOrderDiscountCalculator _orderDiscountCalculator;
+        private readonly IOrderItemDiscountCalculatorFactory _orderItemDiscountCalculatorFactory;
         public OrderCheckOutProcessor(ISkuRepository skuRepo,
             IPromotionRuleFinder promotionRuleFinder,
             IPromotionEngine promotionEngine,
-            IOrderDiscountCalculator orderDiscountCalculator
+            IOrderDiscountCalculator orderDiscountCalculator,
+            IOrderItemDiscountCalculatorFactory orderItemDiscountCalculatorFactory
         )
         {
             _skuRepo = skuRepo;
             _ruleFinder = promotionRuleFinder;
             _promotionEngine = promotionEngine;
             _orderDiscountCalculator = orderDiscountCalculator;
-
-
+            _orderItemDiscountCalculatorFactory = orderItemDiscountCalculatorFactory;
         }
 
         public decimal GetTotalOrderValue(Order order)
@@ -30,12 +31,7 @@ namespace ShoppingPromoCore.Core.OrderInfo
             List<IPromotionRule> rules = _ruleFinder.GetPromotionRules(order);
             _promotionEngine.ApplyPromotion(_orderDiscountCalculator, rules);
             return _orderDiscountCalculator.GetTotalPrice();
-
         }
-
-
-
-
 
         private IOrderDiscountCalculator InitializeDiscountCalculator(Order order)
         {
@@ -43,7 +39,8 @@ namespace ShoppingPromoCore.Core.OrderInfo
             foreach (var item in order.Items)
             {
                 var unitPrice = _skuRepo.GetSkuPrice(item.SkuId);
-                _orderDiscountCalculator.AddOrderItem(new OrderItemDiscountCalculator(item, unitPrice));
+                _orderDiscountCalculator.AddOrderItem(_orderItemDiscountCalculatorFactory.
+                    GetOrderItemDiscountCalculator(item, unitPrice));
             }
 
             return _orderDiscountCalculator;

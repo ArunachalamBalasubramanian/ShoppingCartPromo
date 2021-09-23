@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using ShoppingPromoCore.Entities;
 using ShoppingPromoCore.Interfaces;
@@ -11,6 +12,7 @@ namespace ShoppingPromoCore.Core.OrderInfo
         private decimal _cumulativePriceWithPromotion;
         private decimal _cumulativePriceWithOutPromotion;
         private readonly List<IOrderItemDiscountCalculator> _checkedOutItemDiscountCalculator;
+       
 
         public OrderDiscountCalculator()
         {

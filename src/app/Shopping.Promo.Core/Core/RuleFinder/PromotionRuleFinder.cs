@@ -51,7 +51,7 @@ namespace ShoppingPromoCore.Core.RuleFinder
                 }
                 rules.Add(ruleInfo);
             }
-            return null;
+            return rules;
         }
     }
 }

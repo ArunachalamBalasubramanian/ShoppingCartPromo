@@ -11,11 +11,13 @@ namespace ShoppingPromoCore.Core.OrderInfo
         private readonly IPromotionEngine _promotionEngine;
         private readonly IOrderDiscountCalculator _orderDiscountCalculator;
         private readonly IOrderItemDiscountCalculatorFactory _orderItemDiscountCalculatorFactory;
+        private readonly ILogger _logger;
         public OrderCheckOutProcessor(ISkuRepository skuRepo,
             IPromotionRuleFinder promotionRuleFinder,
             IPromotionEngine promotionEngine,
             IOrderDiscountCalculator orderDiscountCalculator,
-            IOrderItemDiscountCalculatorFactory orderItemDiscountCalculatorFactory
+            IOrderItemDiscountCalculatorFactory orderItemDiscountCalculatorFactory,
+            ILogger logger
         )
         {
             _skuRepo = skuRepo;
@@ -23,6 +25,7 @@ namespace ShoppingPromoCore.Core.OrderInfo
             _promotionEngine = promotionEngine;
             _orderDiscountCalculator = orderDiscountCalculator;
             _orderItemDiscountCalculatorFactory = orderItemDiscountCalculatorFactory;
+            _logger = logger;
         }
 
         public decimal GetTotalOrderValue(Order order)

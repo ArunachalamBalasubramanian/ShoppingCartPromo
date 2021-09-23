@@ -6,10 +6,4 @@ namespace ShoppingPromoCore.Interfaces
     {
         IPromotionRule GetPromotionRule(PromotionType promoType);
     }
-
-    public interface IOrderItemDiscountCalculatorFactory
-    {
-        IOrderItemDiscountCalculator GetOrderItemDiscountCalculator(OrderItem orderItem, decimal unitPrice);
-    }
-    
 }

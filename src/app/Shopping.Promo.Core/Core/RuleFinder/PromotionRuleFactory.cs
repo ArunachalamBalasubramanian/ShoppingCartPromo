@@ -10,13 +10,18 @@ namespace ShoppingPromoCore.Core.RuleFinder
     /// </summary>
     public class PromotionRuleFactory : IPromotionFactory
     {
+        private readonly ILogger _logger;
+        public PromotionRuleFactory(ILogger logger)
+        {
+            _logger = logger;
+        }
         public IPromotionRule GetPromotionRule(PromotionType promoType)
         {
             IPromotionRule rule;
             switch (promoType)
             {
                 case PromotionType.Fixed:
-                    rule= new FixedPricePromotionRule();
+                    rule= new FixedPricePromotionRule(_logger);
                     break;
                 case PromotionType.Percentage:
                     rule = new PercentagePricePromotionRule();
@@ -25,7 +30,7 @@ namespace ShoppingPromoCore.Core.RuleFinder
                     rule = new VariableDiscountPromotionRule();
                     break;
                 default:
-                    rule =  new FixedPricePromotionRule();
+                    rule =  new FixedPricePromotionRule(_logger);
                     break;
 
             }

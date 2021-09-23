@@ -16,13 +16,16 @@ namespace ShoppingPromoCore.Core.RuleFinder
     /// </summary>
     public class PromotionRuleFinder : IPromotionRuleFinder
     {
+        private readonly ILogger _logger;
         private readonly IPromotionRuleRepo _promoRuleRepo;
         private readonly IPromotionFactory _promotionFactory;
         public PromotionRuleFinder(IPromotionRuleRepo promoRuleRepo,
-            IPromotionFactory promotionFactory)
+            IPromotionFactory promotionFactory,
+            ILogger logger)
         {
             _promoRuleRepo = promoRuleRepo;
             _promotionFactory = promotionFactory;
+            _logger = logger;
         }
 
         public List<IPromotionRule> GetPromotionRules(Order order)

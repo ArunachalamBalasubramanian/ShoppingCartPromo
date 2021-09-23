@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ShoppingPromoCore.Entities;
+using ShoppingPromoCore.Interfaces;
 
 namespace ShoppingPromoCore.Core.Promotion
 {
@@ -9,8 +10,12 @@ namespace ShoppingPromoCore.Core.Promotion
         public decimal TotalPrice { get; set; }
 
         private int _numberOfTimesToApplyThePromotion;
+        private readonly ILogger _logger;
 
-
+        public FixedPricePromotionRule(ILogger logger)
+        {
+            _logger = logger;
+        }
         private void Reset()
         {
             _numberOfTimesToApplyThePromotion = Int32.MaxValue;

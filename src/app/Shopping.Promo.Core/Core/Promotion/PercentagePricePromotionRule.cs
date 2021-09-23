@@ -3,7 +3,7 @@ using ShoppingPromoCore.Entities;
 
 namespace ShoppingPromoCore.Core.Promotion
 {
-    public class DiscountPricePromotionRule : PromotionRule
+    public class PercentagePricePromotionRule : PromotionRule
     {
         public decimal TotalDiscountInPrice { get; set; }
 

@@ -40,41 +40,18 @@ namespace ShoppingPromoCore.Core.RuleFinder
             List<IPromotionRule> rules = new List<IPromotionRule>();
             foreach (var ruleDetail in configuredRuleDetails)
             {
-                rules.Add(_promotionFactory.GetPromotionRule(ruleDetail.PromoType));
+                var ruleInfo = _promotionFactory.GetPromotionRule(ruleDetail.PromoType);
+                ruleInfo.Id = ruleDetail.Id;
+                ruleInfo.Name = ruleDetail.Name;
+                ruleInfo.PromotionRuleItems = new List<PromotionRuleItem>();
+                foreach (var promoRuleItemDetails in ruleDetail.PromotionRuleDetails)
+                {
+                    ruleInfo.PromotionRuleItems.Add(new PromotionRuleItem{ Quantity = promoRuleItemDetails.Quantity,
+                        SkuId = promoRuleItemDetails.SkuId});
+                }
+                rules.Add(ruleInfo);
             }
             return null;
-        }
-    }
-
-
-    public interface IPromotionFactory
-    {
-        IPromotionRule GetPromotionRule(PromotionType promoType);
-    }
-    public class PromotionRuleFactory : IPromotionFactory
-    {
-        public IPromotionRule GetPromotionRule(PromotionType promoType)
-        {
-            IPromotionRule rule;
-            switch (promoType)
-            {
-                case PromotionType.Fixed:
-                    rule= new FixedPricePromotionRule();
-                    break;
-                case PromotionType.Percentage:
-                    rule = new PercentagePricePromotionRule();
-                    break;
-                case PromotionType.Variable:
-                    rule = new VariableDiscountPromotionRule();
-                    break;
-                default:
-                    rule =  new FixedPricePromotionRule();
-                    break;
-
-            }
-
-            return rule;
-
         }
     }
 }

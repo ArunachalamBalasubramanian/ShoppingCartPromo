@@ -44,7 +44,7 @@ namespace ShoppingPromoCore.Interfaces
     public interface IPromotionEngine
     {
         void ApplyPromotion(IOrderDiscountCalculator orderDiscountCalculator,
-            List<PromotionDetails> rules);
+            List<IPromotionRule> rules);
     }
 
     public interface IPromotionRuleFinder
@@ -55,7 +55,10 @@ namespace ShoppingPromoCore.Interfaces
 
     public interface IPromotionRule
     {
-
+        void ApplyPromotion(Order order);
+        bool IsPromotionActive();
+        List<OrderItem> GetDiscountedItems();
+        decimal GetDiscountedPrice();
     }
 
 

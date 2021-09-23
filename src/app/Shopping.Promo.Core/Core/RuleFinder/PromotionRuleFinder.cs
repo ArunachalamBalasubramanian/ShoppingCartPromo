@@ -4,25 +4,8 @@ using System.Text;
 using ShoppingPromoCore.Entities;
 using ShoppingPromoCore.Interfaces;
 
-namespace ShoppingPromoCore.Core
+namespace ShoppingPromoCore.Core.RuleFinder
 {
-
-    public class PromotionRuleItem
-    {
-        public char SKUId { get; set; }
-        public int Quantity { get; set; }
-
-        
-    }
-
-
-
-    public abstract class PromotionRule : IPromotionRule
-    {
-        
-    }
-
-
     public class PromotionRuleFinder : IPromotionRuleFinder
     {
         public PromotionRuleFinder(IPromotionRuleRepo promoRule)
